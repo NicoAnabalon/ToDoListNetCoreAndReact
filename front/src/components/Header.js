@@ -6,12 +6,11 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Header = () => {
     const theme = useTheme()
-    const size = useMediaQuery(theme.breakpoints.down('sm'))
-    console.log(size)
+    const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
     return (
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-              {size === false 
+              {smallScreen === false 
                 ? 
                   <Toolbar>
                     <Typography variant="h3" sx={{ flexGrow: 1, color: theme.palette.text.main }}>
@@ -29,15 +28,15 @@ const Header = () => {
                   </Toolbar>
                 : 
                   <Toolbar>
-                    <Typography variant="h6" sx={{ flexGrow: 1, color: theme.palette.text.main }}>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, color: theme.palette.text.main }}>
                       To Do List
                     </Typography>
-                      <ExternalLink href="https://www.linkedin.com/in/nicol%C3%A1s-felipe-anabal%C3%B3n-abarca/">
-                        <LinkedInIcon fontSize="sm"/>
-                      </ExternalLink>
-                      <ExternalLink href="https://github.com/NicoAnabalon">
-                        <GitHubIcon  fontSize="sm"/>
-                      </ExternalLink>
+                    <ExternalLink href="https://www.linkedin.com/in/nicol%C3%A1s-felipe-anabal%C3%B3n-abarca/">
+                      <LinkedInIcon fontSize="sm"/>
+                    </ExternalLink>
+                    <ExternalLink href="https://github.com/NicoAnabalon">
+                      <GitHubIcon  fontSize="sm"/>
+                    </ExternalLink>
                   </Toolbar>
               }
         </AppBar>

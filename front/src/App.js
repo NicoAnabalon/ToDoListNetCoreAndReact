@@ -1,13 +1,18 @@
-import { useTheme } from '@mui/material/styles';
-import Header from "./style/components/Header";
-import Container from "./style/components/Container";
+import Header from "./components/Header";
+import Container from "./components/Container";
+import CardContainer from "./components/CardContainer";
+import Card from "./components/Card";
+import CreationForm from "./components/CreationForm";
 
 function App() {
-  const theme = useTheme()
-  console.log(theme.palette.text.main)
   return (
     <Container>
       <Header/>
+        <CardContainer>
+          <Card label="Created" />
+          <Card label="Completed" />
+        </CardContainer>
+        <CreationForm />
     </Container>
   );
 }
