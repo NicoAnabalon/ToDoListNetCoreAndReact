@@ -2,8 +2,11 @@ import { Button, Modal, Box, Typography, useTheme, Divider, TextField, Snackbar,
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import { addBtnStyle, textFieldStyle, modalBoxStyle } from "../style/theme";
+import { postToDo } from "../redux/reducers/todosReducer";
+import { useDispatch } from "react-redux";
 
 const CreationForm = () => {
+    const dispatch = useDispatch()
     const theme = useTheme()
     const [open, setOpen] = useState(false)
     const [toDo, setToDo] = useState("")
@@ -14,7 +17,12 @@ const CreationForm = () => {
 
     const handleCreation = () => {
         if(toDo.trim().length !== 0) {
-            console.log("pasar")
+            const payload = {
+                content: toDo,
+                toDoStatusId: 1
+            }
+            dispatch(postToDo(payload))
+            handleClose()
         } else {
             setNotification({
                 message: "You must describe your ToDo!",

@@ -12,3 +12,8 @@ export const changeToDoStatus = async (id, payload) => {
     const response = await axios.put(`${TODO_URL}/${id}`, payload);
     return response;
 }
+
+export const postNewToDo = async (payload) => {
+    const response = await axios.post(`${TODO_URL}`, payload);
+    return response;
+}
