@@ -3,7 +3,7 @@ import { Divider, Grid, Typography, useMediaQuery, useTheme } from "@mui/materia
 
 const Card = ({ label, children }) => {
     const theme = useTheme()
-    const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+    const smallScreen = useMediaQuery(theme.breakpoints.down('md'))
     return (
         smallScreen === false
             ?

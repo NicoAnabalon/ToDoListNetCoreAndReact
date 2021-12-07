@@ -1,8 +1,9 @@
-import { changeToDoStatus, getAllToDos, postNewToDo } from "../../services/api"
+import { changeToDoStatus, deleteSpecificToDo, getAllToDos, postNewToDo } from "../../services/api"
 
 export const GET_TODOS = "GET_TODOS"
 export const CHANGE_TODO_STATUS = "CHANGE_TODO_STATUS"
 export const POST_TODO = "POST_TODO"
+export const DELETE_TODO = "DELETE_TODO"
 
 export const allTodos = () => {
     return async dispatch => {
@@ -37,6 +38,17 @@ export const postToDo = (payload) => {
     }
 }
 
+export const deleteToDo = (payload) => {
+    return async dispatch => {
+        try {
+            const {data} = await deleteSpecificToDo(payload)
+            dispatch({type: DELETE_TODO, payload: data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 const todosReducer = (state = {}, action) => {
     switch(action.type) {
         case GET_TODOS:
@@ -46,6 +58,9 @@ const todosReducer = (state = {}, action) => {
             return {...state, todos: newTodos}
         case POST_TODO:
             return {...state, todos: [...state.todos, action.payload]}
+        case DELETE_TODO:
+            const actualTodos = state.todos.filter(todo => todo.id === action.payload.id ? null : todo)
+            return {...state, todos: actualTodos}
         default:
             return state
     }

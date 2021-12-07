@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import moment from "moment"
 import { useDispatch } from "react-redux"
-import { changeStatus } from "../redux/reducers/todosReducer"
+import { changeStatus, deleteToDo } from "../redux/reducers/todosReducer"
 
 const listItemStyle = {
     width: "90%", 
@@ -17,7 +17,7 @@ const listItemStyle = {
 const ToDoCard = ({ todo }) => {
   const dispatch = useDispatch()
   const theme = useTheme()
-  const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  const smallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const formatDate = date => moment(date).format("MM/DD/YYYY")
   const dates = `Last Date: ${formatDate(todo.updatedAt)}`;
 
@@ -26,7 +26,7 @@ const ToDoCard = ({ todo }) => {
   }
 
   const handleDelete = (todo) => {
-    console.log(todo)
+    dispatch(deleteToDo(todo.id))
   }
 
   const handleChangeStatus = (todo) => {

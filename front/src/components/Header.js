@@ -6,7 +6,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Header = () => {
     const theme = useTheme()
-    const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+    const smallScreen = useMediaQuery(theme.breakpoints.down('md'))
     return (
         <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
