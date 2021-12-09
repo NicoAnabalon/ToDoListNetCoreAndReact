@@ -1,9 +1,10 @@
-import { changeToDoStatus, deleteSpecificToDo, getAllToDos, postNewToDo } from "../../services/api"
+import { changeToDoStatus, deleteSpecificToDo, getAllToDos, postNewToDo, updateSpecificToDo } from "../../services/api"
 
 export const GET_TODOS = "GET_TODOS"
 export const CHANGE_TODO_STATUS = "CHANGE_TODO_STATUS"
 export const POST_TODO = "POST_TODO"
 export const DELETE_TODO = "DELETE_TODO"
+export const UPDATE_TODO = "UPDATE_TODO"
 
 export const allTodos = () => {
     return async dispatch => {
@@ -49,6 +50,17 @@ export const deleteToDo = (payload) => {
     }
 }
 
+export const updateToDo = (id, payload) => {
+    return async dispatch => {
+        try {
+            const {data} = await updateSpecificToDo(id, payload)
+            dispatch({type: UPDATE_TODO, payload: data})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 const todosReducer = (state = {}, action) => {
     switch(action.type) {
         case GET_TODOS:
@@ -61,6 +73,10 @@ const todosReducer = (state = {}, action) => {
         case DELETE_TODO:
             const actualTodos = state.todos.filter(todo => todo.id === action.payload.id ? null : todo)
             return {...state, todos: actualTodos}
+        case UPDATE_TODO:
+            const updatedTodos = state.todos.map(todo => todo.id === action.payload.id ? action.payload : todo)
+            console.log(updatedTodos)
+            return {...state, todos: updatedTodos}
         default:
             return state
     }

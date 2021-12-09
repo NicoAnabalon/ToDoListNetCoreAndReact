@@ -22,3 +22,8 @@ export const deleteSpecificToDo = async (payload) => {
     const response = await axios.delete(`${TODO_URL}/${payload}`, payload);
     return response;
 }
+
+export const updateSpecificToDo = async (id, payload) => {
+    const response = await axios.put(`${TODO_URL}/${id}`, payload);
+    return response;
+}

@@ -1,11 +1,11 @@
 import { ButtonGroup, IconButton, ListItem, ListItemText, useMediaQuery, useTheme } from "@mui/material"
-import EditIcon from '@mui/icons-material/Edit'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import moment from "moment"
 import { useDispatch } from "react-redux"
 import { changeStatus, deleteToDo } from "../redux/reducers/todosReducer"
+import UpdateForm from "./UpdateForm";
 
 const listItemStyle = {
     width: "90%", 
@@ -20,10 +20,6 @@ const ToDoCard = ({ todo }) => {
   const smallScreen = useMediaQuery(theme.breakpoints.down('md'))
   const formatDate = date => moment(date).format("MM/DD/YYYY")
   const dates = `Last Date: ${formatDate(todo.updatedAt)}`;
-
-  const handleEdit = (todo) => {
-    console.log(todo)
-  }
 
   const handleDelete = (todo) => {
     dispatch(deleteToDo(todo.id))
@@ -57,10 +53,7 @@ const ToDoCard = ({ todo }) => {
           }}
         >
           <ListItemText primary={todo.content} secondary={dates} color="text" />
-          
-          <IconButton onClick={() => handleEdit(todo)}>
-            <EditIcon/>
-          </IconButton>
+          <UpdateForm todo={todo}/>
           <IconButton onClick={() => handleChangeStatus(todo)}>
             {todo.toDoStatusName === 'Created' 
               ?
@@ -90,9 +83,7 @@ const ToDoCard = ({ todo }) => {
         >
           <ListItemText primary={todo.content} secondary={dates} color="text" />
           <ButtonGroup orientation="vertical">
-            <IconButton onClick={() => handleEdit(todo)}>
-              <EditIcon/>
-            </IconButton>
+            <UpdateForm todo={todo}/>
             <IconButton onClick={() => handleChangeStatus(todo)}>
               {todo.toDoStatusName === 'Created' 
                 ?

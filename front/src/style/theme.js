@@ -18,7 +18,7 @@ const theme = createTheme({
 })
 
 export const addBtnStyle = { 
-    position: "absolute", 
+    position: "fixed", 
     bottom: 10, 
     right: 10,
     borderRadius: '50%',
